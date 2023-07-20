@@ -43,6 +43,10 @@
       As it is a table, I did not add any responsive design, as it might be time taking for working with tables with a
       lot
       of info on mobile.
+      <br>
+      The biggest challenge was to make all components more reusable as possible. As we don't have much control on the
+      JSON
+      object, it was a little bit hard.
       <br><br>
       <small class="text-slate-400 dark:text-slate-500">PS: Enjoy the dark mode as I did while building it :)</small>
     </p>

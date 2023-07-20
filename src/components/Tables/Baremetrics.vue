@@ -38,7 +38,6 @@ import DataTable, {FieldType} from "@/components/DataDisplay/Table.vue";
 type Edition = {
   id: string,
   name: string,
-  description: string,
 }
 
 type Screenshot = {
@@ -59,6 +58,12 @@ type Feature = {
   selector: string | null,
   takeScreenshot: boolean | null,
   filename: string | null,
+  editions: string[],
+  FeatureEditions: {
+    items: {
+      edition: Edition
+    }[]
+  },
   screenshots: {
     items: Screenshot[]
   } | null,
@@ -66,7 +71,6 @@ type Feature = {
 
 // Reactive variables
 const loading = ref<boolean>(true)
-const editions = ref<Edition[]>([])
 const features = ref<Feature[]>([])
 const tagline = ref<string>('')
 const description = ref<string>('')
@@ -94,13 +98,30 @@ const getBaremetrics = async () => {
     const res = await axios.get('https://corsproxy.io/?' + baseUrl + 'baremetrics.json')
 
     //setting data
-    editions.value = res.data.editions.items;
-    features.value = res.data.features.items;
     tagline.value = res.data.tagline;
     description.value = res.data.description;
 
+    //I've mapped it since I only need the edition ID
+    const formattedFeatures = res.data.features.items.map((feature: Feature) => {
+      //I've mapped the data to get only the fields I need
+      return {
+        ...feature,
+        editions: feature.FeatureEditions.items.map((item: { edition: Edition }) => {
+          return item.edition.id
+        }).join(', ')
+      }
+    });
+
+    features.value = formattedFeatures;
+
+
     //getting all fields available from the first item
-    allFieldsAvailable.value = Object.keys(res.data.features.items[0])
+    allFieldsAvailable.value = Object.keys(res.data.features.items[0]).filter((field: string) => {
+      return field !== 'FeatureEditions' && field !== 'screenshots'
+    })
+
+    //adding the custom prop on the available fields array
+    allFieldsAvailable.value.push('editions')
 
     //setting the fields to be displayed
     loading.value = false

@@ -24,8 +24,8 @@ import {defineEmits, defineProps, withDefaults} from "vue"
 
 withDefaults(
   defineProps<{
-    type?: "primary" | "secondary" | "subtle" | "ghost",
-    size?: "huge" | "large" | "medium" | "small",
+    type?: "ghost",
+    size?: "small",
     icon?: string,
     iconPosition?: "left" | "right",
     loading?: boolean,
