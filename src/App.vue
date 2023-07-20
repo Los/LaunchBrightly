@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-100 dark:bg-slate-800 w-screen h-screen">
+  <div class="bg-gray-100 dark:bg-slate-800 w-screen h-full pb-8">
     <LayoutHeader />
     <div class="app-container">
       <AppIntroduction class="mt-8" />
