@@ -5,24 +5,24 @@
         <th
           v-for="field in fields"
           :key="field"
-          class="p-6 font-bold tracking-wider"
+          class="px-6 py-4 font-bold tracking-wider"
           scope="col"
         >
           {{ field.label }}
         </th>
       </tr>
     </thead>
-    <tbody class=" bg-white">
+    <tbody class="bg-white dark:bg-slate-900">
       <tr
         v-for="item in data"
         :key="item.id"
-        class="border-b dark:border-gray-700"
+        class="border-b dark:border-slate-800"
       >
         <td
           v-for="(field, index) in fields"
           :key="field"
           :class="{ 'font-medium text-slate-900 dark:text-white': index === 0}"
-          class="px-6 py-4 text-slate-500 font-light dark:text-slate-40"
+          class="px-6 py-4 text-slate-500 font-light dark:text-slate-400"
         >
           {{ item[field.key] }}
         </td>
