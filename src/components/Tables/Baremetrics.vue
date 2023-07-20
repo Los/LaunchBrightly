@@ -17,10 +17,13 @@
       {{ description }}
     </p>
 
+
     <DataTable
+      :available-fields="allFieldsAvailable"
       :data="features"
-      :fields="fields"
+      :default-fields="fields"
       class="mt-6"
+      toggle-fields
     />
   </div>
 </template>
