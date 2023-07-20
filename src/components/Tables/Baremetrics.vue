@@ -102,7 +102,6 @@ const getBaremetrics = async () => {
 
     //I've mapped it since I only need the edition ID
     features.value = res.data.features.items.map((feature: Feature) => {
-      //I've mapped the data to get only the fields I need
       return {
         ...feature,
         editions: feature.FeatureEditions.items.map((item: { edition: Edition }) => {
