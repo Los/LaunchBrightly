@@ -17,7 +17,6 @@
       {{ description }}
     </p>
 
-
     <DataTable
       :available-fields="allFieldsAvailable"
       :data="features"
@@ -102,7 +101,7 @@ const getBaremetrics = async () => {
     description.value = res.data.description;
 
     //I've mapped it since I only need the edition ID
-    const formattedFeatures = res.data.features.items.map((feature: Feature) => {
+    features.value = res.data.features.items.map((feature: Feature) => {
       //I've mapped the data to get only the fields I need
       return {
         ...feature,
@@ -112,22 +111,19 @@ const getBaremetrics = async () => {
       }
     });
 
-    features.value = formattedFeatures;
 
-
-    //getting all fields available from the first item
+    //getting all fields available from the first item, and removing some that we don't want to show due to complexity
     allFieldsAvailable.value = Object.keys(res.data.features.items[0]).filter((field: string) => {
       return field !== 'FeatureEditions' && field !== 'screenshots'
     })
 
     //adding the custom prop on the available fields array
     allFieldsAvailable.value.push('editions')
-
-    //setting the fields to be displayed
-    loading.value = false
   } catch (error) {
     //We could use a better error handling, as a toast or a modal
     console.error(error)
+  } finally {
+    //setting the fields to be displayed
     loading.value = false
   }
 }

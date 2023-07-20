@@ -29,7 +29,7 @@
             <div v-else>
               <input
                 v-model="filterValue"
-                class="p-2"
+                class="p-2 dark:bg-slate-900 font-normal"
                 type="text"
                 @keyup="filterTable(field.key)"
               >
