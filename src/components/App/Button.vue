@@ -3,7 +3,7 @@
     :class="{
       '!w-[34px] !h-[34px]': iconOnly && size === 'small',
       'rounded-lg text-small': size === 'small',
-      'text-gray-100 hover:bg-gray-800': type === 'ghost',
+      'text-gray-600 dark:text-slate-400 dark:hover:bg-slate-800 hover:bg-gray-100': type === 'ghost',
     }"
     @click="$emit('click')"
   >

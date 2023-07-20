@@ -1,6 +1,7 @@
 <template>
   <AppButton
-    :icon="isDarkMode ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"
+    :class="[isDarkMode ? '!text-yellow-300' : '!text-violet-800']"
+    :icon="isDarkMode ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"
     icon-only
     size="small"
     type="ghost"
