@@ -22,16 +22,33 @@
           <th
             v-for="field in fields"
             :key="field"
+            :class="{ 'cursor-pointer': field.sortable }"
             class="px-6 py-4 font-bold tracking-wider"
             scope="col"
+            @click="sortTable(field.key)"
           >
             {{ field.label }}
+            <span
+              v-if="field.sortable"
+              class="ml-1 "
+            >
+              <font-awesome-icon
+                v-if="sortedBy !== field.key"
+                class="text-gray-400"
+                icon="fa-solid fa-sort"
+              />
+              <font-awesome-icon
+                v-else
+                :icon="sortDirection === 'asc' ? 'fa-solid fa-sort-up' : 'fa-solid fa-sort-down'"
+                class="text-gray-700"
+              />
+            </span>
           </th>
         </tr>
       </thead>
       <tbody class="bg-white dark:bg-slate-900">
         <tr
-          v-for="item in data"
+          v-for="item in localData"
           :key="item.id"
           class="border-b dark:border-slate-800"
         >
@@ -73,6 +90,9 @@ const props = withDefaults(
   })
 
 const fields = ref<FieldType[]>(props.defaultFields);
+const sortedBy = ref<string | null>(null);
+const sortDirection = ref<'asc' | 'desc'>('asc');
+const localData = ref(props.data);
 
 const isFieldVisible = (field: string) => {
   return fields.value.some((f) => f.key === field);
@@ -95,5 +115,30 @@ const toggleField = (field: string) => {
       label: field,
     }];
   }
+}
+
+//Thanks to GitHub Copilot for this sorting snippet <3
+const sortTable = (field: string) => {
+  if (sortedBy.value === field) {
+    sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc';
+  } else {
+    sortedBy.value = field;
+    sortDirection.value = 'asc';
+  }
+
+  localData.value = localData.value.sort((a: any, b: any) => {
+    const aValue = a[field];
+    const bValue = b[field];
+
+    if (aValue === bValue) {
+      return 0;
+    }
+
+    if (sortDirection.value === 'asc') {
+      return aValue < bValue ? -1 : 1;
+    } else {
+      return aValue > bValue ? -1 : 1;
+    }
+  });
 }
 </script>
