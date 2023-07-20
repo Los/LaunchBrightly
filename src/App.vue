@@ -1,11 +1,15 @@
 <template>
   <div class="bg-gray-100 dark:bg-slate-800 w-screen h-screen">
     <LayoutHeader />
-    <div class="app-container" />
+    <div class="app-container">
+      <AppIntroduction class="mt-8" />
+      <TableBaremetrics class="mt-8" />
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import LayoutHeader from '@/components/Layout/Header.vue';
-import '@/assets/style.css'
+import AppIntroduction from '@/components/App/Introduction.vue';
+import TableBaremetrics from '@/components/Tables/Baremetrics.vue';
 </script>

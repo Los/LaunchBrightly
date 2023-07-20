@@ -1,15 +1,14 @@
 <template>
-  <header class="py-5 w-full bg-white dark:bg-slate-950 text-white text-center text-sm font-light sticky top-0">
-    <div class="flex items-center pr-4">
+  <header
+    class="py-5 w-full bg-white dark:bg-slate-950 text-white text-center text-sm font-light sticky top-0 shadow-sm"
+  >
+    <div class="flex items-center pr-4 app-container">
       <div class="flex-auto relative text-slate-900 dark:text-slate-400">
         You can find the source code for this project at
         <a
-          class="text-violet-600 font-medium hover:text-violet-400 underline underline-offset-4 decoration-dashed"
           href="https://github.com/Los/LaunchBrightly"
           target="_blank"
-        >
-          GitHub
-        </a>
+        >GitHub</a>
       </div>
       <div class="flex-none">
         <DarkModeToggler />
